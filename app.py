@@ -3,11 +3,11 @@ import pickle
 import numpy as np
 import pandas as pd
 
-application = Flask(_name_)
+application = Flask(__name__)
 app = application
 
 # Load the ML model
-dictionary = pickle.load(open('../models/backend.pkl', 'rb'))
+dictionary = pickle.load(open('./models/model.pkl', 'rb'))
 model = dictionary['xgboost_model']
 scaler = dictionary['standardscaler']
 
@@ -54,5 +54,5 @@ def predict():
     else:
         return render_template('index.html')
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port= 8080, debug=True)

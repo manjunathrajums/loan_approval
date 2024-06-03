@@ -72,13 +72,12 @@
 <body>
     <h1>LOAN APPROVAL PREDICTOR</h1>
 
-    <form action="{{ url_for('predict') }}" method="post">
+    <form id="loanForm" action="{{ url_for('predict') }}" method="post">
         <label for="dependents">Number of Dependents</label>
         <input type="number" id="dependents" name="dependents" required />
 
         <p>Education</p>
         <div class="radio-group">
-          
             <label for="graduated">Graduated</label>
             <input type="radio" id="graduated" name="graduated" value="GRADUATED" required />
             <label for="notgraduated">Not Graduated</label>
@@ -120,6 +119,74 @@
         <button type="submit">Submit</button>
     </form>
 
-    <p class="result">The loan is:{{ results }}</p>
+    <p class="result">The loan is: {{ results }}</p>
+
+    <script>
+        document.getElementById('loanForm').addEventListener('submit', function(event) {
+            var dependents = document.getElementById('dependents').value;
+            var income = document.getElementById('income').value;
+            var loan = document.getElementById('loan').value;
+            var loanTerm = document.getElementById('loan_term').value;
+            var cibil = document.getElementById('cibil').value;
+            var resident = document.getElementById('resident').value;
+            var commercial = document.getElementById('commercial').value;
+            var luxury = document.getElementById('luxury').value;
+            var bank = document.getElementById('bank').value;
+
+            if (cibil < 300 || cibil > 900) {
+                alert('CIBIL Score must be between 300 and 900.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!Number.isInteger(Number(dependents)) || dependents < 0) {
+                alert('Number of Dependents must be a non-negative integer.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!Number.isInteger(Number(income)) || income < 0) {
+                alert('Income Per Annum must be a non-negative integer.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!Number.isInteger(Number(loan)) || loan < 0) {
+                alert('Loan Amount must be a non-negative integer.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!Number.isInteger(Number(loanTerm)) || loanTerm < 0) {
+                alert('Loan Term must be a non-negative integer.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!Number.isInteger(Number(resident)) || resident < 0) {
+                alert('Residential Asset Value must be a non-negative integer.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!Number.isInteger(Number(commercial)) || commercial < 0) {
+                alert('Commercial Asset Value must be a non-negative integer.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!Number.isInteger(Number(luxury)) || luxury < 0) {
+                alert('Luxury Asset Value must be a non-negative integer.');
+                event.preventDefault();
+                return;
+            }
+
+            if (!Number.isInteger(Number(bank)) || bank < 0) {
+                alert('Bank Asset Value must be a non-negative integer.');
+                event.preventDefault();
+                return;
+            }
+        });
+    </script>
 </body>
 </html>
