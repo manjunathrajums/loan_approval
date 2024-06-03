@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOAN APPROVAL PREDICTION</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label, p {
+            margin-bottom: 10px;
+            display: block;
+            color: #666;
+        }
+
+        input[type="number"], input[type="text"], input[type="radio"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p.result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>LOAN APPROVAL PREDICTOR</h1>
+
+    <form action="{{ url_for('predict') }}" method="post">
+        <label for="dependents">Number of Dependents</label>
+        <input type="number" id="dependents" name="dependents" required />
+
+        <p>Education</p>
+        <div class="radio-group">
+          
+            <label for="graduated">Graduated</label>
+            <input type="radio" id="graduated" name="graduated" value="GRADUATED" required />
+            <label for="notgraduated">Not Graduated</label>
+            <input type="radio" id="notgraduated" name="graduated" value="NOT GRADUATED" required />
+        </div>
+
+        <p>Self Employed</p>
+        <div class="radio-group">
+            <label for="self_yes">Yes</label>
+            <input type="radio" id="self_yes" name="self" value="yes" required />
+            <label for="self_no">No</label>
+            <input type="radio" id="self_no" name="self" value="no" required />
+        </div>
+
+        <label for="income">Income Per Annum</label>
+        <input type="number" id="income" name="income" required />
+
+        <label for="loan">Loan Amount</label>
+        <input type="number" id="loan" name="loan" required />
+
+        <label for="loan_term">Loan Term</label>
+        <input type="number" id="loan_term" name="loan_term" required />
+
+        <label for="cibil">CIBIL Score</label>
+        <input type="number" id="cibil" name="cibil" required />
+
+        <label for="resident">Residential Asset Value</label>
+        <input type="number" id="resident" name="resident" required />
+
+        <label for="commercial">Commercial Asset Value</label>
+        <input type="number" id="commercial" name="commercial" required />
+
+        <label for="luxury">Luxury Asset Value</label>
+        <input type="number" id="luxury" name="luxury" required />
+
+        <label for="bank">Bank Asset Value</label>
+        <input type="number" id="bank" name="bank" required />
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p class="result">The loan is:{{ results }}</p>
+</body>
+</html>
